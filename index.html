@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bay Area Tech Tiers</title>
+  <meta name="description" content="Prestige tier lists of well-known Bay Area tech companies, by role.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e5484d'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='20' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>Bay Area Tech Tiers</h1>
+      <p class="sub">Which companies carry the most prestige, by role. <span id="asof"></span></p>
+    </div>
+    <button class="icon-btn" id="settings-btn" aria-label="Settings" title="Settings (⌘,)">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.5 7.5 0 0 0-1.7-1L15 3h-4l-.3 2.9a7.5 7.5 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.5 7.5 0 0 0 1.7 1L11 21h4l.3-2.9a7.5 7.5 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
+    </button>
+  </header>
+
+  <nav class="roles" id="roles" role="tablist" aria-label="Role"></nav>
+
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="Find a company or city…" aria-label="Find a company">
+    <div class="mode" role="group" aria-label="Which list">
+      <button id="mode-curated" class="seg on" aria-pressed="true">Curated</button>
+      <button id="mode-mine" class="seg" aria-pressed="false">My list</button>
+    </div>
+  </div>
+  <p class="mine-hint" id="mine-hint" hidden>
+    Drag companies between tiers, or click one and pick a tier. Saved in this browser.
+    <span id="mine-count"></span>
+    <button class="link-btn" id="reset-role">Reset this role</button>
+  </p>
+
+  <main id="board" class="board" aria-live="polite"></main>
+
+  <footer class="foot">
+    <p>An opinion, not a fact. It reflects how people hiring and job-hunting in Bay Area tech tend to see each company for each role.
+      Prestige isn't the same as pay, culture or fit.</p>
+  </footer>
+
+  <!-- Company detail -->
+  <dialog id="detail" class="sheet" aria-labelledby="detail-name">
+    <form method="dialog" class="sheet-close"><button aria-label="Close">✕</button></form>
+    <div class="detail-head">
+      <span class="mono big" id="detail-mono"></span>
+      <div>
+        <h2 id="detail-name"></h2>
+        <p class="muted" id="detail-city"></p>
+      </div>
+    </div>
+    <p id="detail-blurb"></p>
+    <p class="note" id="detail-note" hidden></p>
+    <div id="detail-move" hidden>
+      <h3>Move in my list</h3>
+      <div class="move-row" id="detail-move-row"></div>
+    </div>
+    <h3>Tier for each role</h3>
+    <table class="all-roles" id="detail-roles"></table>
+  </dialog>
+
+  <!-- Settings -->
+  <dialog id="settings" class="sheet" aria-labelledby="settings-title">
+    <form method="dialog" class="sheet-close"><button aria-label="Close">✕</button></form>
+    <h2 id="settings-title">Settings</h2>
+    <label class="field">Appearance
+      <select id="set-theme">
+        <option value="system">Match system</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </label>
+    <label class="field">Role shown on open
+      <select id="set-role"></select>
+    </label>
+    <label class="check"><input type="checkbox" id="set-cities"> Show cities under company names</label>
+    <label class="check"><input type="checkbox" id="set-mine"> Open in “My list” mode</label>
+    <div class="danger">
+      <button class="btn" id="reset-all">Reset all my lists</button>
+    </div>
+    <p class="muted small">Settings and your lists stay in this browser only.</p>
+  </dialog>
+
+  <!-- Feedback -->
+  <button class="feedback-tab" id="feedback-btn">Feedback</button>
+  <dialog id="feedback" class="sheet" aria-labelledby="feedback-title">
+    <form method="dialog" class="sheet-close"><button aria-label="Close">✕</button></form>
+    <h2 id="feedback-title">Feedback</h2>
+    <form id="feedback-form">
+      <label class="field">What kind
+        <select id="fb-kind">
+          <option>Placement</option>
+          <option>Missing company</option>
+          <option>Bug</option>
+          <option>Idea</option>
+        </select>
+      </label>
+      <label class="field">Message
+        <textarea id="fb-message" rows="5" required placeholder="e.g. Figma belongs in S for engineering because…"></textarea>
+      </label>
+      <button class="btn primary" type="submit">Continue on GitHub</button>
+      <p class="muted small">This opens a prefilled GitHub issue in a new tab. Nothing is sent until you submit it there.</p>
+    </form>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "bay-area-tech-tiers",
+  "private": true,
+  "type": "module",
+  "description": "Bay Area Tech Tiers: prestige tier lists of Bay Area tech companies, by role.",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node --test tests/*.test.mjs"
+  }
+}

@@ -4,7 +4,7 @@
 .
 ├── index.html            Page markup: header, role tabs, board, and the detail, settings and feedback dialogs
 ├── css/styles.css        All styling; light/dark color tokens, tier colors, phone layout
-├── js/data.js            The curated content: tiers, roles, companies and their per-role tiers and notes
+├── js/data.js            The curated content: tiers, rankings, company types, companies and their tiers and notes
 ├── js/logic.js           Pure functions: build the board, move a company, search, clean stored data, feedback link
 ├── js/app.js             Glue: renders the page, handles clicks/drag/keys, reads and writes localStorage
 ├── tests/

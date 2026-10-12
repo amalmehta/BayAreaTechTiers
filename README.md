@@ -1,8 +1,8 @@
 # Bay Area Tech Tiers
 
-Prestige tier lists (S to D) of well-known Bay Area tech companies, one list for each of six roles. You can also rearrange them into your own list.
+Prestige tier lists (S to D) of 72 well-known Bay Area tech companies: an overall list plus one for each of six roles. You can filter by company type (Big Tech, Frontier AI, Startups, Established, Legacy & Hardware) and rearrange any list into your own.
 
-![Software Engineering tier list](docs/images/desktop.png)
+![Overall tier list](docs/images/desktop.png)
 
 <img src="docs/images/mobile-dark.png" alt="Phone-width view in dark mode" width="320">
 

@@ -68,9 +68,16 @@ Decided without asking:
 - Feedback opens a prefilled GitHub issue (no backend). Settings: theme, default role, show cities, open in My list mode, reset all lists.
 - Tests use Node's built-in runner. No dependencies, no build step.
 
+Company types and Overall (2026-10-11, decided without asking):
+- Types: Big Tech, Frontier AI, Startups (private), Established (public, below Big Tech scale; the "middling" group), Legacy & Hardware.
+- LinkedIn and Waymo count as Big Tech (Microsoft and Alphabet). Stripe and Databricks are Startups because they're private. Figma and Airbnb are Established.
+- "Overall" is its own curated tier per company, not an average of the role tiers. It's the default tab.
+- Added 28 companies, for 72 in all. Frontier AI: Safe Superintelligence, Thinking Machines Lab, Physical Intelligence. Startups: Cursor, Cognition, Applied Intuition, Sierra, Harvey, Linear, Decagon, Mercor, Replit, Brex, Retool, Mercury, Faire, Airtable, Gusto, Deel, Benchling. Established: Samsara, Palo Alto Networks, Chime, Zoom. Legacy & Hardware: Broadcom, Applied Materials, HP, eBay.
+
 CHANGELOG:
 
 - 2026-10-06 — created
+- 2026-10-11 — added company types (Big Tech, Frontier AI, Startups, Established, Legacy & Hardware) as filters, an Overall ranking, and 28 more companies (72 total)
 - 2026-10-06 — built v1: static site, 6 role tier lists, My list mode, settings, feedback tab, tests, docs; GitHub Pages
 - 2026-09-15 — added meta-instruction: built-out applications include a small feedback tab
 - 2026-09-15 — added meta-instruction: no "Claude" attribution in commits, PRs, or branches

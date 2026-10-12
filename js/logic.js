@@ -1,6 +1,6 @@
 // Pure functions behind the page. No DOM, no storage — easy to test in Node.
 
-import { TIERS, ROLES } from "./data.js";
+import { TIERS, ROLES, CATEGORIES } from "./data.js";
 
 const TIER_IDS = TIERS.map((t) => t.id);
 const ROLE_IDS = ROLES.map((r) => r.id);
@@ -11,6 +11,15 @@ export function isTier(id) {
 
 export function isRole(id) {
   return ROLE_IDS.includes(id);
+}
+
+// "all" or one of the CATEGORIES ids.
+export function isCategory(id) {
+  return id === "all" || CATEGORIES.some((cat) => cat.id === id);
+}
+
+export function inCategory(company, categoryId) {
+  return categoryId === "all" || company.category === categoryId;
 }
 
 // Overrides are the visitor's own placements for one role: { companyId: tierId }.
@@ -72,7 +81,7 @@ export function sanitizeMyLists(raw, companies) {
 
 export const DEFAULT_SETTINGS = Object.freeze({
   theme: "system", // system | light | dark
-  defaultRole: "swe",
+  defaultRole: "overall",
   showCities: true,
   openInMyList: false,
 });

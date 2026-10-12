@@ -1,8 +1,8 @@
 // Wires the data and logic to the page.
 
-import { AS_OF, TIERS, ROLES, COMPANIES } from "./data.js";
+import { AS_OF, TIERS, ROLES, CATEGORIES, COMPANIES } from "./data.js";
 import {
-  buildBoard, moveCompany, changedCount, matchesQuery, tierFor,
+  buildBoard, moveCompany, changedCount, matchesQuery, tierFor, inCategory,
   sanitizeMyLists, sanitizeSettings, feedbackUrl,
 } from "./logic.js";
 
@@ -26,6 +26,7 @@ const state = {
   roleId: settings.defaultRole,
   mode: settings.openInMyList ? "mine" : "curated",
   query: "",
+  category: "all",
   myLists: sanitizeMyLists(load(KEYS.myLists), COMPANIES),
   openId: null,
 };
@@ -76,9 +77,25 @@ function renderRoles() {
   }, r.name)));
 }
 
+function renderCategories() {
+  const all = { id: "all", name: "All", meaning: "Every company on the list" };
+  $("categories").replaceChildren(...[all, ...CATEGORIES].map((cat) => {
+    const count = COMPANIES.filter((co) => inCategory(co, cat.id)).length;
+    return el("button", {
+      "aria-pressed": String(cat.id === state.category),
+      title: cat.meaning,
+      onclick: () => { state.category = cat.id; render(); },
+    }, cat.name, el("span", { class: "count" }, String(count)));
+  }));
+  const cat = CATEGORIES.find((x) => x.id === state.category);
+  $("category-hint").textContent = cat ? `${cat.name}: ${cat.meaning}.` : "";
+  $("category-hint").hidden = !cat;
+}
+
 function renderBoard() {
   const ov = overrides();
-  const board = buildBoard(COMPANIES, state.roleId, ov);
+  const shown = COMPANIES.filter((co) => inCategory(co, state.category));
+  const board = buildBoard(shown, state.roleId, ov);
   const mine = state.mode === "mine";
 
   const rows = TIERS.map((tier) => {
@@ -105,7 +122,7 @@ function renderBoard() {
     const row = el("section", { class: "row", "aria-label": `Tier ${tier.label}` },
       el("div", { class: "tier-label", style: tierStyle(tier.id), title: tier.meaning },
         el("b", {}, tier.label), el("span", {}, tier.meaning.split(" — ")[0])),
-      el("div", { class: "chips" }, ...chips));
+      el("div", { class: "chips" }, ...(chips.length ? chips : [el("span", { class: "empty" }, "—")])));
 
     if (mine) {
       row.addEventListener("dragover", (e) => { e.preventDefault(); row.classList.add("drop-target"); });
@@ -142,6 +159,7 @@ function applySettings() {
 
 function render() {
   renderRoles();
+  renderCategories();
   renderToolbar();
   renderBoard();
   if (state.openId && $("detail").open) fillDetail(state.openId);
@@ -154,7 +172,7 @@ function fillDetail(id) {
   const current = tierFor(co, state.roleId, ov);
   $("detail-mono").replaceWith(Object.assign(monoEl(co, true), { id: "detail-mono" }));
   $("detail-name").textContent = co.name;
-  $("detail-city").textContent = co.city;
+  $("detail-city").textContent = `${co.city} · ${CATEGORIES.find((x) => x.id === co.category).name}`;
   $("detail-blurb").textContent = co.blurb;
   const note = co.notes[state.roleId];
   $("detail-note").hidden = !note;

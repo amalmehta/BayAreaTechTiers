@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { COMPANIES, TIERS } from "../js/data.js";
 import {
   buildBoard, moveCompany, changedCount, matchesQuery, tierFor,
-  sanitizeMyLists, sanitizeSettings, DEFAULT_SETTINGS, feedbackUrl,
+  sanitizeMyLists, sanitizeSettings, DEFAULT_SETTINGS, feedbackUrl, inCategory, isCategory,
 } from "../js/logic.js";
 
 const stripe = COMPANIES.find((c) => c.id === "stripe");
@@ -73,4 +73,18 @@ test("feedbackUrl builds a prefilled GitHub issue link", () => {
   assert.equal(url.origin + url.pathname, "https://github.com/me/Repo/issues/new");
   assert.equal(url.searchParams.get("title"), "[Bug] Broken chip");
   assert.match(url.searchParams.get("body"), /more detail[\s\S]*Role being viewed: Design/);
+});
+
+test("category filter keeps only that type, and 'all' keeps everything", () => {
+  assert.ok(inCategory(stripe, "startup"));
+  assert.ok(!inCategory(stripe, "bigtech"));
+  assert.ok(inCategory(intel, "all"));
+  assert.ok(isCategory("all") && isCategory("frontier") && !isCategory("unicorns"));
+  const frontier = COMPANIES.filter((co) => inCategory(co, "frontier"));
+  const board = buildBoard(frontier, "overall");
+  assert.equal(Object.values(board).flat().length, frontier.length);
+});
+
+test("the page opens on Overall by default", () => {
+  assert.equal(DEFAULT_SETTINGS.defaultRole, "overall");
 });

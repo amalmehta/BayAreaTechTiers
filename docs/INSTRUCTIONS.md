@@ -4,7 +4,8 @@
 
 Open the live site at https://amalmehta.github.io/BayAreaTechTiers/.
 
-- **Pick a role:** use the tabs (Software Engineering, ML & AI Research, Product Management, Design, Data Science, Sales & Go-to-Market).
+- **Pick a ranking:** use the tabs: Overall (the default), Software Engineering, ML & AI Research, Product Management, Design, Data Science, Sales & Go-to-Market.
+- **Filter by company type:** use the row under the tabs: All, Big Tech, Frontier AI, Startups (private), Established (public, below Big Tech scale), Legacy & Hardware. The board then shows only that type, ranked against each other. Each button shows how many companies it has.
 - **Find a company:** type in the search box. Companies that don't match fade out. It matches on name, city and description.
 - **See details:** click a company to see its description, a note on this role (when there is one), and its tier for every role.
 - **Make your own list:** switch to **My list**.
@@ -14,7 +15,7 @@ Open the live site at https://amalmehta.github.io/BayAreaTechTiers/.
   - Your lists are saved in this browser only.
 - **Settings:** the gear button, or ⌘, (Ctrl+, on Windows and Linux). Settings cover:
   - Appearance: system, light or dark.
-  - The role shown when the page opens.
+  - The ranking shown when the page opens (Overall by default).
   - Whether to show cities under company names.
   - Whether to open in My list mode.
   - Reset all my lists.
@@ -45,10 +46,10 @@ This runs the Node built-in test runner on `tests/`. The tests check that the da
 Edit `js/data.js`. Each company is one line:
 
 ```js
-c("stripe", "Stripe", "South San Francisco", "Payments infrastructure for the internet.", "SCSAAS", { pm: "…" }),
+c("stripe", "Stripe", "South San Francisco", "startup", "Payments infrastructure for the internet.", "SCSAASS", { pm: "…" }),
 ```
 
-The six letters are its tiers in role order: Engineering, ML & AI, Product, Design, Data, Sales. The last argument is optional and holds notes for specific roles. Run `npm test` afterwards. It catches missing or invalid tiers.
+The fourth argument is the company type, one of the `CATEGORIES` ids: `bigtech`, `frontier`, `startup`, `established` or `legacy`. The seven letters are its tiers in this order: Engineering, ML & AI, Product, Design, Data, Sales, Overall. The last argument is optional and holds notes for specific roles. Run `npm test` afterwards. It catches missing or invalid tiers.
 
 ## Deploy
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bay Area Tech Tiers</title>
-  <meta name="description" content="Prestige tier lists of well-known Bay Area tech companies, by role.">
+  <meta name="description" content="Prestige tier lists of well-known Bay Area tech companies, overall and by role, filterable by company type.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e5484d'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='20' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -12,7 +12,7 @@
   <header class="top">
     <div class="brand">
       <h1>Bay Area Tech Tiers</h1>
-      <p class="sub">Which companies carry the most prestige, by role. <span id="asof"></span></p>
+      <p class="sub">Which companies carry the most prestige, overall and by role. <span id="asof"></span></p>
     </div>
     <button class="icon-btn" id="settings-btn" aria-label="Settings" title="Settings (⌘,)">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.5 7.5 0 0 0-1.7-1L15 3h-4l-.3 2.9a7.5 7.5 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.5 7.5 0 0 0 1.7 1L11 21h4l.3-2.9a7.5 7.5 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
@@ -20,6 +20,8 @@
   </header>
 
   <nav class="roles" id="roles" role="tablist" aria-label="Role"></nav>
+  <nav class="categories" id="categories" aria-label="Company type"></nav>
+  <p class="category-hint" id="category-hint" hidden></p>
 
   <div class="toolbar">
     <input type="search" id="search" placeholder="Find a company or city…" aria-label="Find a company">

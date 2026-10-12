@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { TIERS, ROLES, COMPANIES } from "../js/data.js";
+import { TIERS, ROLES, CATEGORIES, COMPANIES } from "../js/data.js";
 
 const tierIds = TIERS.map((t) => t.id);
 
@@ -38,4 +38,15 @@ test("each role uses the top and bottom tiers and keeps S selective", () => {
     assert.ok(counts.S <= 6, `${r.id} has ${counts.S} in S`);
     assert.ok(counts.D >= 1, `${r.id} has nothing in D`);
   }
+});
+
+test("every company has a known category, and every category has companies", () => {
+  const ids = CATEGORIES.map((cat) => cat.id);
+  for (const co of COMPANIES) assert.ok(ids.includes(co.category), `${co.name}: ${co.category}`);
+  for (const id of ids) assert.ok(COMPANIES.some((co) => co.category === id), `${id} is empty`);
+});
+
+test("Overall is a role with its own curated tiers", () => {
+  assert.equal(ROLES[0].id, "overall");
+  assert.equal(COMPANIES.find((c) => c.id === "openai").tiers.overall, "S");
 });

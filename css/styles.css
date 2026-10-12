@@ -61,6 +61,16 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .roles button[aria-selected="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
 
+.categories { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.categories button {
+  border: 1px dashed var(--border); background: none; border-radius: 8px;
+  padding: 5px 10px; font-size: 13.5px; color: var(--muted);
+}
+.categories button[aria-pressed="true"] { border-style: solid; border-color: var(--accent); color: var(--text); background: var(--surface); font-weight: 600; }
+.categories .count { margin-left: 6px; font-size: 11.5px; opacity: .7; font-weight: 400; }
+.category-hint { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+.empty { color: var(--muted); padding: 8px 4px; }
+
 .toolbar { display: flex; gap: 10px; margin: 14px 0 10px; flex-wrap: wrap; }
 #search {
   flex: 1 1 220px; min-width: 0; padding: 9px 12px; border-radius: var(--radius);
